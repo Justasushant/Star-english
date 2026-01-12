@@ -1,20 +1,19 @@
-
 import React from 'react';
 import { COURSES } from '../constants';
 
 const Courses: React.FC = () => {
   return (
     <div className="pt-24 min-h-screen pb-32">
-      <section className="bg-[#3D4127] text-white py-24 md:py-32">
+      <section className="bg-[#202a5d] text-white py-24 md:py-32">
         <div className="container mx-auto px-6 md:px-12 text-center">
-          <h1 className="font-krub text-5xl md:text-8xl font-bold mb-8">Our Courses</h1>
-          <p className="text-[#BAC095] max-w-2xl mx-auto uppercase tracking-[0.2em] text-xs md:text-sm font-black opacity-80">
-            Rigorous programs designed for global linguistic excellence.
+          <h1 className="font-krub text-5xl md:text-[7rem] font-bold mb-8 tracking-tighter">Our Programs</h1>
+          <p className="text-[#a5b4fc] max-w-2xl mx-auto uppercase tracking-[0.3em] text-[10px] md:text-xs font-black">
+            Rigorous Mastery Tracks for Global Linguistic Excellence.
           </p>
         </div>
       </section>
 
-      <section className="py-24">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 gap-24 lg:gap-32">
             {COURSES.map((course, idx) => (
@@ -24,29 +23,29 @@ const Courses: React.FC = () => {
                     <img 
                       src={course.image} 
                       alt={course.title}
-                      className="rounded-[2.5rem] shadow-2xl w-full h-[350px] md:h-[600px] object-cover"
+                      className="rounded-[3rem] shadow-2xl w-full h-[350px] md:h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
                     />
-                    <div className="absolute inset-0 rounded-[2.5rem] border-8 border-white/10 group-hover:border-[#D4DE95]/30 transition-all duration-500"></div>
+                    <div className="absolute inset-0 rounded-[3rem] border-8 border-white/5 group-hover:border-[#a5b4fc]/20 transition-all duration-500"></div>
                   </div>
                 </div>
                 <div className="w-full lg:w-1/2 p-4 md:p-8">
-                  <div className="flex items-center space-x-4 mb-6">
-                    <span className="text-[#636B2F] font-black uppercase tracking-[0.2em] text-xs">Level: {course.level}</span>
-                    <div className="h-px w-12 bg-gray-200"></div>
-                    <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">{course.duration}</span>
+                  <div className="flex items-center space-x-4 mb-8">
+                    <span className="text-[#202a5d] font-black uppercase tracking-[0.3em] text-[10px] bg-[#f5f8ff] px-4 py-1.5 rounded-full">{course.level}</span>
+                    <div className="h-px w-12 bg-gray-100"></div>
+                    <span className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">{course.duration}</span>
                   </div>
-                  <h2 className="font-krub text-4xl md:text-6xl font-bold text-[#3D4127] mb-8 leading-tight">{course.title}</h2>
-                  <p className="text-gray-600 text-lg md:text-xl mb-10 leading-relaxed opacity-90">
+                  <h2 className="font-krub text-4xl md:text-6xl font-bold text-[#202a5d] mb-8 leading-none tracking-tighter">{course.title}</h2>
+                  <p className="text-gray-600 text-lg md:text-xl mb-12 leading-relaxed font-medium">
                     {course.description} This intensive program utilizes our proprietary methodology, combining classic principles with contemporary case studies to ensure absolute communication mastery.
                   </p>
-                  <div className="flex flex-wrap gap-3 md:gap-4 mb-12">
-                    {['24/7 Support', 'Elite Peer Network', 'Certification', 'Personal Mentor'].map(feature => (
-                      <span key={feature} className="px-5 py-2 bg-[#F9FAF6] text-[#3D4127] text-[10px] md:text-xs font-black uppercase tracking-widest rounded-full border border-gray-100">
+                  <div className="flex flex-wrap gap-3 mb-14">
+                    {['24/7 Support', 'Elite Alumni Hub', 'Certification', 'Personal Coaching'].map(feature => (
+                      <span key={feature} className="px-5 py-2 bg-[#f5f8ff] text-[#202a5d] text-[10px] font-black uppercase tracking-widest rounded-full border border-[#a5b4fc]/10">
                         {feature}
                       </span>
                     ))}
                   </div>
-                  <button className="w-full md:w-fit bg-[#636B2F] text-white px-12 py-5 rounded-full font-bold uppercase tracking-widest hover:bg-[#3D4127] transition-all shadow-xl text-sm">
+                  <button className="w-full md:w-fit bg-[#202a5d] text-white px-14 py-6 rounded-full font-bold uppercase tracking-widest shadow-xl hover:bg-[#3d4ba1] transition-all text-sm active:scale-95">
                     Enrollment Inquiries
                   </button>
                 </div>

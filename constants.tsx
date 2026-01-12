@@ -2,10 +2,11 @@
 import { Course, Testimonial, SuccessStory, BlogPost } from './types';
 
 export const COLORS = {
-  primary: '#636B2F',
-  lightSage: '#BAC095',
-  lightLime: '#D4DE95',
-  darkOlive: '#3D4127',
+  primary: '#202a5d',
+  secondary: '#3d4ba1',
+  accent: '#7c9eff',
+  lightBg: '#f5f8ff',
+  white: '#ffffff',
 };
 
 export const COURSES: Course[] = [
@@ -105,7 +106,6 @@ export const SUCCESS_STORIES: SuccessStory[] = [
   },
 ];
 
-// Added BLOG_POSTS export for the Star Journal page
 export const BLOG_POSTS: BlogPost[] = [
   {
     id: '1',
@@ -113,7 +113,8 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt: 'How mastering your voice can change your professional trajectory and open new doors globally.',
     image: 'https://images.unsplash.com/photo-1475721027187-402ad2989a3b?auto=format&fit=crop&q=80&w=800',
     date: 'Oct 15, 2024',
-    category: 'Communication'
+    category: 'Communication',
+    type: 'article'
   },
   {
     id: '2',
@@ -121,6 +122,25 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt: 'Why natural flow and psychological comfort matter more than perfect rules in the beginning of your journey.',
     image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=800',
     date: 'Nov 02, 2024',
-    category: 'Learning'
+    category: 'Learning',
+    type: 'blog'
+  },
+  {
+    id: '3',
+    title: 'Immersion Podcast: Episode 1',
+    excerpt: 'Listen to native speakers discuss business trends and learn to mimic their cadence and rhythm.',
+    image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=80&w=800',
+    date: 'Dec 01, 2024',
+    category: 'Audio',
+    type: 'podcast'
+  },
+  {
+    id: '4',
+    title: 'Quick Tip: The Power of Silence',
+    excerpt: 'Learn how to use intentional pauses to sound more authoritative in your next presentation.',
+    image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=800',
+    date: 'Dec 05, 2024',
+    category: 'Rhetoric',
+    type: 'tip'
   }
 ];

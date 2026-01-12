@@ -31,7 +31,6 @@ export interface SuccessStory {
   image: string;
 }
 
-// Added BlogPost interface for the Star Journal
 export interface BlogPost {
   id: string;
   title: string;
@@ -39,4 +38,5 @@ export interface BlogPost {
   image: string;
   date: string;
   category: string;
+  type: 'article' | 'blog' | 'podcast' | 'tip';
 }

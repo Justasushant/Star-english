@@ -1,31 +1,33 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>Star English | Excellence in Language Mastery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+      html, body {
+        width: 100%;
+        overflow-x: hidden;
+      }
       body {
         font-family: 'Inter', sans-serif;
         background-color: #ffffff;
-        color: #1a1a1a;
+        color: #202a5d;
       }
       .font-krub {
         font-family: 'Krub', sans-serif;
       }
-      .text-primary-olive { color: #636B2F; }
-      .bg-primary-olive { background-color: #636B2F; }
-      .text-light-sage { color: #BAC095; }
-      .bg-light-sage { background-color: #BAC095; }
-      .text-light-lime { color: #D4DE95; }
-      .bg-light-lime { background-color: #D4DE95; }
-      .text-dark-olive { color: #3D4127; }
-      .bg-dark-olive { background-color: #3D4127; }
+      /* Deep Navy Theme Classes */
+      .text-navy-deep { color: #202a5d; }
+      .bg-navy-deep { background-color: #202a5d; }
+      .text-navy-light { color: #3d4ba1; }
+      .bg-navy-light { background-color: #3d4ba1; }
+      .text-accent-blue { color: #7c9eff; }
+      .bg-accent-blue { background-color: #7c9eff; }
       
       @keyframes fade-in {
         from { opacity: 0; transform: translateY(10px); }
@@ -33,6 +35,11 @@
       }
       .animate-fade-in {
         animation: fade-in 0.8s ease-out forwards;
+      }
+      
+      ::selection {
+        background-color: #202a5d;
+        color: #ffffff;
       }
     </style>
     <script type="importmap">
