@@ -12,7 +12,7 @@ const Results = React.lazy(() => import('./pages/Results'));
 const Contact = React.lazy(() => import('./pages/Contact'));
 const Enquiry = React.lazy(() => import('./pages/Enquiry'));
 const CourseDetail = React.lazy(() => import('./pages/CourseDetail'));
-const DailyLearning = React.lazy(() => import('./pages/DailyLearning'));
+const Gallery = React.lazy(() => import('./pages/Gallery'));
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -44,15 +44,10 @@ const App: React.FC = () => {
       if (course) return <CourseDetail course={course} />;
     }
 
-    // Dynamic Learning Hub Routes
-    if (currentPage.startsWith('learning-')) {
-      const type = currentPage.replace('learning-', '') as 'articles' | 'blogs' | 'podcasts' | 'tips';
-      return <DailyLearning type={type} />;
-    }
-
     switch (currentPage) {
       case 'home': return <Home onNavigate={navigateTo} />;
       case 'about': return <About />;
+      case 'gallery': return <Gallery />;
       case 'results': return <Results />;
       case 'contact': return <Contact />;
       case 'enquiry': return <Enquiry />;

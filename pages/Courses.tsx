@@ -23,7 +23,7 @@ const Courses: React.FC = () => {
                     <img 
                       src={course.image} 
                       alt={course.title}
-                      className="rounded-[3rem] shadow-2xl w-full h-[350px] md:h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                      className="rounded-[3rem] shadow-2xl w-full h-[350px] md:h-[600px] object-cover transition-all duration-700"
                     />
                     <div className="absolute inset-0 rounded-[3rem] border-8 border-white/5 group-hover:border-[#a5b4fc]/20 transition-all duration-500"></div>
                   </div>

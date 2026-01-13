@@ -12,8 +12,8 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course }) => {
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-[#202a5d]">
         <img 
           src={course.image} 
-          className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale" 
           alt={course.title} 
+          className="absolute inset-0 w-full h-full object-cover opacity-20" 
         />
         <div className="container mx-auto px-6 md:px-12 relative z-10 text-center text-white">
           <span className="text-[#a5b4fc] font-black uppercase tracking-[0.4em] text-xs mb-6 block animate-fade-in">{course.level} Excellence</span>

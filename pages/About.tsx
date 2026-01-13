@@ -1,6 +1,50 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import starEnglishVideo from '../assets/Star English.mp4';
+import ownerVideo from '../assets/OWNER.mp4';
 
 const About: React.FC = () => {
+  const starVideoRef = useRef<HTMLVideoElement | null>(null);
+  const starVideoWrapRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const video = starVideoRef.current;
+    const wrap = starVideoWrapRef.current;
+    if (!video || !wrap) return;
+
+    video.muted = true;
+
+    const tryPlay = async () => {
+      if (!video.paused) return;
+      try {
+        await video.play();
+      } catch {
+        try {
+          video.muted = true;
+          await video.play();
+        } catch {
+          // ignore autoplay restrictions
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+          void tryPlay();
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: [0, 0.3, 0.6, 0.9] }
+    );
+
+    observer.observe(wrap);
+    return () => observer.disconnect();
+  }, []);
+
   const timelineEvents = [
     {
       year: '2010',
@@ -37,19 +81,40 @@ const About: React.FC = () => {
   return (
     <div className="pt-24 min-h-screen bg-white">
       {/* Hero Header */}
-      <section className="bg-[#f5f8ff] py-24 md:py-32">
+      <section className="bg-white py-24 md:py-32">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="max-w-4xl">
-            <h1 className="font-krub text-5xl md:text-8xl font-bold text-[#202a5d] mb-8">The Star Philosophy</h1>
-            <p className="text-xl md:text-3xl text-gray-600 font-light leading-relaxed">
-              At Star English, we believe that true mastery is the refinement of one's voice through discipline, specialized coaching, and constant practice.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h1 className="font-krub text-5xl md:text-8xl font-bold text-[#202a5d] mb-8">The Star Philosophy</h1>
+              <p className="text-xl md:text-3xl text-gray-600 font-light leading-relaxed">
+                At Star English, we believe that true mastery is the refinement of one's voice through discipline, specialized coaching, and constant practice.
+              </p>
+            </div>
+
+            <div className="w-full flex justify-center lg:justify-end">
+              <div className="w-full max-w-lg">
+                <div className="py-4">
+                  <div ref={starVideoWrapRef} className="bg-black overflow-hidden w-full h-[260px] md:h-[320px]">
+                  <video
+                    src={starEnglishVideo}
+                    ref={starVideoRef}
+                    className="w-full h-full object-cover"
+                    controls={false}
+                    loop
+                      muted
+                    playsInline
+                    preload="metadata"
+                  />
+                </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* The Journey Section - Vertical Timeline */}
-      <section className="py-32 bg-white">
+      <section className="py-32 bg-[#f5f8ff]">
         <div className="container mx-auto px-6 md:px-12">
           <div className="text-center mb-24">
             <h2 className="font-krub text-4xl md:text-6xl font-bold text-[#202a5d] mb-6">Our Journey</h2>
@@ -86,6 +151,36 @@ const About: React.FC = () => {
         </div>
       </section>
 
+      {/* Owner Section */}
+      <section className="py-28 bg-[#f5f8ff]">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="text-[#202a5d] font-black uppercase tracking-[0.4em] text-[10px] mb-6 block">About The Owner</span>
+              <h2 className="font-krub text-4xl md:text-6xl font-bold text-[#202a5d] mb-8 tracking-tighter">A mentor-first approach.</h2>
+              <p className="text-gray-600 leading-relaxed text-lg mb-6">
+                 Star English is led with a simple goal: build confidence, clarity, and strong speaking tone for every learner—kids, adults, and anyone starting from scratch.
+              </p>
+              <p className="text-gray-600 leading-relaxed text-lg">
+                With decades of classroom experience and practical speaking drills, the focus stays on real communication: pronunciation, rhythm, everyday vocabulary, and the courage to speak without fear.
+              </p>
+            </div>
+
+            <div className="w-full flex justify-center lg:justify-end">
+              <div className="w-full max-w-md aspect-[9/16] rounded-[3rem] overflow-hidden shadow-2xl border border-[#202a5d]/10 bg-black">
+                <video
+                  src={ownerVideo}
+                  className="w-full h-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Legacy and Mission Footer Section */}
       <section className="py-32 bg-[#202a5d] text-white">
         <div className="container mx-auto px-6 md:px-12">
@@ -112,7 +207,7 @@ const About: React.FC = () => {
             <div className="relative">
               <img 
                 src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800" 
-                className="rounded-[3rem] shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 border-4 border-white/10"
+                className="rounded-[3rem] shadow-2xl transition-all duration-700 border-4 border-white/10"
                 alt="Star English Environment"
               />
               <div className="absolute -bottom-8 -left-8 bg-[#3d4ba1] p-8 rounded-3xl hidden md:block shadow-2xl">

@@ -19,7 +19,7 @@ const Results: React.FC = () => {
             {SUCCESS_STORIES.map((story) => (
               <div key={story.id} className="group cursor-pointer">
                 <div className="relative overflow-hidden rounded-3xl mb-6 shadow-lg border border-gray-100">
-                  <img src={story.image} className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700 grayscale group-hover:grayscale-0" alt={story.name} />
+                  <img src={story.image} className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700" alt={story.name} />
                   <div className="absolute inset-0 bg-[#202a5d] opacity-0 group-hover:opacity-20 transition-opacity"></div>
                 </div>
                 <h3 className="font-krub text-2xl font-bold text-[#202a5d] mb-2">{story.name}</h3>

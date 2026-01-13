@@ -1,16 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { COURSES, TESTIMONIALS } from '../constants';
 import StatsCounter from '../components/StatsCounter';
 import LazyVideo from '../components/LazyVideo';
 import spokenMasteryVideo from '../assets/star-kids-owner.mp4';
+import childExample01 from '../assets/CHILD EXAMPLE 01.mp4';
+import childExample02 from '../assets/CHILD EXAMPLE 02.mp4';
 
 interface HomeProps {
   onNavigate: (page: string) => void;
 }
 
 const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+  const [isWhyLeadersImageOpen, setIsWhyLeadersImageOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isWhyLeadersImageOpen) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsWhyLeadersImageOpen(false);
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isWhyLeadersImageOpen]);
+
   return (
     <div className="pt-0">
+      {isWhyLeadersImageOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-white/20 backdrop-blur-md"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Why leaders choose Star image"
+          onClick={() => setIsWhyLeadersImageOpen(false)}
+        >
+          <img
+            src="https://i.postimg.cc/hGt12HWv/image.png"
+            alt="Why leaders choose Star"
+            className="max-w-[95vw] max-h-[90vh] object-contain rounded-[4px] shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      )}
+
       {/* 1. HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -34,6 +68,18 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             <p className="text-lg md:text-2xl opacity-90 mb-16 leading-relaxed font-medium max-w-2xl mx-auto text-balance">
               Unlock global career opportunities with our prestigious articulation coaching and executive communication mastery programs.
             </p>
+
+            <div className="max-w-2xl mx-auto mb-14">
+              <div className="inline-flex flex-wrap items-center justify-center gap-3 bg-white/10 border border-white/10 backdrop-blur-md rounded-3xl px-6 py-4">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/90">Star Spoken English Classes</span>
+                <span className="text-white/40">•</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/80">25+ Years Experience</span>
+                <span className="text-white/40">•</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/80">Kids | Adults | No Age Limit</span>
+                <span className="text-white/40">•</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/80">Online & Group Classes</span>
+              </div>
+            </div>
             
             <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-12">
               <button 
@@ -79,12 +125,6 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     <p className="text-[#a5b4fc] text-[10px] uppercase font-black tracking-widest">Director of Spoken Excellence</p>
                  </div>
               </div>
-              <button 
-                onClick={() => onNavigate('learning-tips')}
-                className="mt-12 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-white hover:text-[#202a5d] transition-all"
-              >
-                Watch More Lessons
-              </button>
             </div>
             
             <div className="lg:w-2/5 w-full flex justify-center">
@@ -115,9 +155,20 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div className="relative order-2 lg:order-1">
               <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#a5b4fc]/10 rounded-full blur-3xl"></div>
-              <div className="relative z-10 border-[1.5rem] border-[#f5f8ff] rounded-[4rem] shadow-2xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" alt="Elite Education" loading="lazy" decoding="async" />
-              </div>
+              <button
+                type="button"
+                className="relative z-10 w-full text-left rounded-[4px] shadow-2xl overflow-hidden transition-all duration-500"
+                onClick={() => setIsWhyLeadersImageOpen(true)}
+                aria-label="Expand Why leaders choose Star image"
+              >
+                <img
+                  src="https://i.postimg.cc/hGt12HWv/image.png"
+                  className="w-full h-full object-cover"
+                  alt="Why leaders choose Star"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
               <div className="absolute -bottom-8 -right-8 bg-[#202a5d] p-8 rounded-3xl shadow-2xl z-20 hidden md:block border border-white/10">
                 <p className="text-[#a5b4fc] font-krub text-5xl font-black">98%</p>
                 <p className="text-white text-[10px] font-black uppercase tracking-widest mt-1 text-center">Success Rate</p>
@@ -147,44 +198,9 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 4. DAILY FREE LESSONS PREVIEW */}
-      <section className="py-32 bg-[#f5f8ff]">
-        <div className="container mx-auto px-6 md:px-12 text-center">
-          <div className="mb-24">
-            <span className="text-[#202a5d] font-black uppercase tracking-[0.4em] text-[10px] mb-6 block">Daily Updates</span>
-            <h2 className="font-krub text-4xl md:text-6xl font-bold text-[#202a5d] mb-4 tracking-tighter">Linguistic Insights</h2>
-            <p className="text-gray-400 font-bold uppercase tracking-[0.2em] text-[10px]">Fresh Lessons Every 24 Hours</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
-            {[
-              { type: 'Word of the Day', item: 'Eloquence', detail: 'Fluent or persuasive speaking or writing.', img: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=400' },
-              { type: 'Strategic Tool', item: 'Active Listening', detail: 'The secret to winning boardroom negotiations.', img: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=400' },
-              { type: 'Idiom of the Day', item: 'Cutting Edge', detail: 'The most advanced or exciting stage.', img: 'https://images.unsplash.com/photo-1490127252417-7c393f993ee4?auto=format&fit=crop&q=80&w=400' }
-            ].map((lesson) => (
-              <div key={lesson.type} className="bg-white rounded-[3rem] overflow-hidden group cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 border border-[#a5b4fc]/10">
-                <div className="h-56 overflow-hidden relative">
-                  <img src={lesson.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={lesson.type} loading="lazy" decoding="async" />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-                </div>
-                <div className="p-10">
-                  <span className="text-[#202a5d] font-black uppercase tracking-widest text-[9px] mb-4 block">{lesson.type}</span>
-                  <h4 className="font-krub text-2xl font-bold text-[#202a5d] mb-4">{lesson.item}</h4>
-                  <p className="text-gray-500 text-xs mb-8 leading-relaxed">{lesson.detail}</p>
-                  <div className="flex items-center text-[#202a5d] font-black text-[10px] uppercase tracking-widest group-hover:translate-x-2 transition-transform">
-                    <span>Explore Lesson</span>
-                    <span className="ml-2">&rarr;</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* 5. PHILOSOPHY */}
       <section className="py-40 bg-[#202a5d] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 grayscale pointer-events-none">
+        <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
           <img src="https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?auto=format&fit=crop&q=80&w=1200" className="w-full h-full object-cover" alt="Library" loading="lazy" decoding="async" />
         </div>
         <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -201,6 +217,58 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             >
               Our Philosophy
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* CHILDREN'S SPEAKING EXAMPLES (PREVIEW) */}
+      <section className="py-32 bg-white">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between mb-16 gap-10">
+            <div className="max-w-2xl text-center lg:text-left">
+              <span className="text-[#202a5d] font-black uppercase tracking-[0.4em] text-[10px] mb-6 block">Kids Speak</span>
+              <h2 className="font-krub text-4xl md:text-6xl font-bold text-[#202a5d] tracking-tighter leading-tight">
+                Children’s English <span className="text-[#3d4ba1]">Speaking Tone.</span>
+              </h2>
+              <p className="text-gray-500 text-sm md:text-base leading-relaxed mt-6 max-w-xl">
+                Watch real classroom-style examples to hear clarity, tone, and confidence.
+              </p>
+            </div>
+
+            <div className="w-full lg:w-auto flex justify-center">
+              <button
+                onClick={() => onNavigate('gallery')}
+                className="w-full sm:w-auto bg-[#202a5d] text-white px-14 py-5 rounded-full font-krub font-bold tracking-[0.2em] uppercase hover:bg-[#3d4ba1] transition-all shadow-lg text-[10px]"
+              >
+                Visit Gallery
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {[
+              { src: childExample01, title: 'Child Example 01' },
+              { src: childExample02, title: 'Child Example 02' },
+            ].map((video) => (
+              <div
+                key={video.title}
+                className="bg-[#f5f8ff] rounded-[3rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-[#a5b4fc]/10 max-w-[360px] mx-auto w-full"
+              >
+                <div className="aspect-[9/16] bg-black">
+                  <LazyVideo
+                    src={video.src}
+                    title={video.title}
+                    useFirstFramePreview
+                    containerClassName="w-full h-full"
+                    videoClassName="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-10">
+                  <p className="text-[#202a5d] font-black uppercase tracking-widest text-[10px]">{video.title}</p>
+                  <p className="text-gray-500 text-xs mt-3 leading-relaxed">Click to play.</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -226,11 +294,11 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             </div>
             <div className="lg:w-1/2 grid grid-cols-2 gap-6 h-full">
               <div className="space-y-6">
-                <img src="https://images.unsplash.com/photo-1544716124-059002ce3d38?auto=format&fit=crop&q=80&w=600" className="rounded-3xl shadow-xl grayscale h-[350px] object-cover" alt="Mastery 1" />
+                <img src="https://images.unsplash.com/photo-1544716124-059002ce3d38?auto=format&fit=crop&q=80&w=600" className="rounded-3xl shadow-xl h-[350px] object-cover" alt="Mastery 1" />
                 <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600" className="rounded-3xl shadow-lg h-[200px] w-full object-cover brightness-90" alt="Learning context" />
               </div>
               <div className="pt-16 space-y-6">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=600" className="rounded-3xl shadow-lg h-[250px] w-full object-cover grayscale" alt="Peer interaction" />
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=600" className="rounded-3xl shadow-lg h-[250px] w-full object-cover" alt="Peer interaction" />
                 <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=600" className="rounded-3xl shadow-xl h-[300px] object-cover" alt="Mastery 2" />
               </div>
             </div>

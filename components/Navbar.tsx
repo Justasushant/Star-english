@@ -11,7 +11,6 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCoursesDropdownOpen, setIsCoursesDropdownOpen] = useState(false);
-  const [isLearningDropdownOpen, setIsLearningDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +24,6 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
     onNavigate(id);
     setIsMobileMenuOpen(false);
     setIsCoursesDropdownOpen(false);
-    setIsLearningDropdownOpen(false);
   };
 
   const isHeroPage = currentPage === 'home' || currentPage.startsWith('course-');
@@ -101,47 +99,6 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
             </div>
           </div>
 
-          {/* Daily Learning Dropdown */}
-          <div 
-            className="relative h-full py-2"
-            onMouseEnter={() => setIsLearningDropdownOpen(true)}
-            onMouseLeave={() => setIsLearningDropdownOpen(false)}
-          >
-            <button
-              className={`font-krub text-[11px] font-bold tracking-[0.2em] uppercase transition-colors hover:text-[#3d4ba1] flex items-center space-x-2 ${
-                currentPage.startsWith('learning-') ? activeColorClass : textColorClass
-              }`}
-            >
-              <span>Daily Learning</span>
-              <svg className={`w-3 h-3 transition-transform duration-300 ${isLearningDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            {isLearningDropdownOpen && <div className="absolute top-full left-0 w-full h-4 bg-transparent"></div>}
-
-            <div className={`absolute top-full left-1/2 -translate-x-1/2 w-72 bg-white shadow-2xl rounded-2xl py-3 mt-2 border border-[#202a5d]/10 overflow-hidden transition-all duration-300 origin-top ${isLearningDropdownOpen ? 'opacity-100 visible scale-100' : 'opacity-0 invisible scale-95'}`}>
-              <div className="px-4 py-2 border-b border-gray-50 mb-2">
-                <p className="text-[9px] font-black text-[#202a5d] uppercase tracking-[0.3em]">Immersion Paths</p>
-              </div>
-              {[
-                { name: 'Academic Articles', id: 'articles' },
-                { name: 'Learning Blogs', id: 'blogs' },
-                { name: 'Listening Podcasts', id: 'podcasts' },
-                { name: 'Linguistic Tips', id: 'tips' }
-              ].map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleLinkClick(`learning-${item.id}`)}
-                  className="w-full text-left px-6 py-3 text-[10px] font-bold uppercase tracking-widest text-[#202a5d] hover:bg-[#f5f8ff] hover:text-[#3d4ba1] transition-colors flex items-center justify-between group"
-                >
-                  <span>{item.name}</span>
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
           <button
             onClick={() => handleLinkClick('contact')}
             className={`font-krub text-[11px] font-bold tracking-[0.2em] uppercase transition-colors hover:text-[#3d4ba1] relative py-1 ${
@@ -200,8 +157,12 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
                 ))}
               </div>
             </div>
-            {['Home', 'Contact Us', 'About Us'].map((name) => (
-              <button key={name} onClick={() => handleLinkClick(name.toLowerCase().replace(' ', '-'))} className="w-full py-3 text-white font-krub text-xl font-bold uppercase tracking-widest">{name}</button>
+            {[
+              { name: 'Home', id: 'home' },
+              { name: 'Contact Us', id: 'contact' },
+              { name: 'About Us', id: 'about' },
+            ].map((item) => (
+              <button key={item.id} onClick={() => handleLinkClick(item.id)} className="w-full py-3 text-white font-krub text-xl font-bold uppercase tracking-widest">{item.name}</button>
             ))}
             <button onClick={() => handleLinkClick('enquiry')} className="w-full mt-4 bg-white text-[#202a5d] py-5 rounded-full font-krub text-lg font-bold tracking-widest uppercase shadow-lg active:scale-95">Join Now</button>
           </div>
